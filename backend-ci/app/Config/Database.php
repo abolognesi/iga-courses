@@ -24,32 +24,7 @@ class Database extends Config
      *
      * @var array<string, mixed>
      */
-    public array $default = [
-        'DSN'          => '',
-        'hostname'     => 'db',
-        'username'     => getenv('MYSQL_USERNAME'),
-        'password'     => getenv('MYSQL_PASSWORD'),
-        'database'     => getenv('MYSQL_DATABASE'),
-        'DBDriver'     => 'MySQLi',
-        'DBPrefix'     => 'igac_',
-        'pConnect'     => false,
-        'DBDebug'      => true,
-        'charset'      => 'utf8mb4',
-        'DBCollat'     => 'utf8mb4_general_ci',
-        'swapPre'      => '',
-        'encrypt'      => false,
-        'compress'     => false,
-        'strictOn'     => false,
-        'failover'     => [],
-        'port'         => 3306,
-        'numberNative' => false,
-        'foundRows'    => false,
-        'dateFormat'   => [
-            'date'     => 'Y-m-d',
-            'datetime' => 'Y-m-d H:i:s',
-            'time'     => 'H:i:s',
-        ],
-    ];
+    public array $default;
 
     //    /**
     //     * Sample database connection for SQLite3.
@@ -192,6 +167,37 @@ class Database extends Config
     public function __construct()
     {
         parent::__construct();
+
+        $username = getenv('MYSQL_USERNAME') ?: 'default_username';
+        $password = getenv('MYSQL_PASSWORD') ?: 'default_password';
+        $database = getenv('MYSQL_DATABASE') ?: 'default_database';
+
+        $this->default = [
+            'DSN'          => '',
+            'hostname'     => 'db',
+            'username'     => getenv('MYSQL_USERNAME'),
+            'password'     => getenv('MYSQL_PASSWORD'),
+            'database'     => getenv('MYSQL_DATABASE'),
+            'DBDriver'     => 'MySQLi',
+            'DBPrefix'     => 'igac_',
+            'pConnect'     => false,
+            'DBDebug'      => true,
+            'charset'      => 'utf8mb4',
+            'DBCollat'     => 'utf8mb4_general_ci',
+            'swapPre'      => '',
+            'encrypt'      => false,
+            'compress'     => false,
+            'strictOn'     => false,
+            'failover'     => [],
+            'port'         => 3306,
+            'numberNative' => false,
+            'foundRows'    => false,
+            'dateFormat'   => [
+                'date'     => 'Y-m-d',
+                'datetime' => 'Y-m-d H:i:s',
+                'time'     => 'H:i:s',
+            ],
+        ];
 
         // Ensure that we always set the database group to 'tests' if
         // we are currently running an automated test suite, so that
