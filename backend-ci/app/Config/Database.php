@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'db',
-        'username'     => getenv('MYSQL_USERNAME'),
-        'password'     => getenv('MYSQL_PASSWORD'),
-        'database'     => getenv('MYSQL_DATABASE'),
+        'username'     => 'username',
+        'password'     => 'password',
+        'database'     => 'database',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => 'igac_',
         'pConnect'     => false,
@@ -192,6 +192,28 @@ class Database extends Config
     public function __construct()
     {
         parent::__construct();
+
+        if (getenv('MYSQL_HOST') !== false)
+        {
+            $this->default['hostname'] = getenv('MYSQL_HOST');
+        }
+    
+        if (getenv('MYSQL_USER') !== false)
+        {
+            $this->default['username'] = getenv('MYSQL_USER');
+        }
+    
+        if (getenv('MYSQL_PASSWORD') !== false)
+        {
+            $this->default['password'] = getenv('MYSQL_PASSWORD');
+        }
+    
+        if (getenv('MYSQL_DATABASE') !== false)
+        {
+            $this->default['database'] = getenv('MYSQL_DATABASE');
+        }
+
+        
 
         // Ensure that we always set the database group to 'tests' if
         // we are currently running an automated test suite, so that
