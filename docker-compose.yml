@@ -46,7 +46,7 @@ version: '3.8'
        networks:
          - app-network
 
-  frontend_app:
+  vue_app:
     build:
       context: ./frontend-vue
       args:
@@ -56,9 +56,20 @@ version: '3.8'
     volumes:
       - ./frontend-vue:/app
     ports:
-      - "80:80"
+      - "8008:80"
     depends_on:
       - api_nginx
+    networks:
+      - app-network
+
+  vue_nginx:
+    image: nginx:alpine
+    container_name: vue_nginx
+    volumes:
+      - ./frontend-vue/dist:/usr/share/nginx/html 
+      - ./docker/nginx-vue/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - vue_app
     networks:
       - app-network
 
