@@ -16,3 +16,8 @@ $routes->get('/clients/(:num)', 'ClientController::show/$1');
 $routes->post('/clients', 'ClientController::create');      
 $routes->put('/clients/(:num)', 'ClientController::update/$1'); 
 $routes->delete('/clients/(:num)', 'ClientController::delete/$1'); 
+$routes->options('/shopping', 'ShoppingController::options');
+$routes->post('/shopping', 'ShoppingController::registerPurchase');      
+$routes->get('/shopping', 'ShoppingController::index'); 
+$routes->get('/shopping/client', 'ShoppingController::pourchasesOrderByClient');   
+$routes->get('/shopping/admin', 'ShoppingController::admin');       
