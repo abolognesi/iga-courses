@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'db',
-        'username'     => 'username',
-        'password'     => 'password',
-        'database'     => 'database',
+        'username'     => 'iga_user',
+        'password'     => '123456',
+        'database'     => 'iga_db',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => 'igac_',
         'pConnect'     => false,
@@ -192,11 +192,6 @@ class Database extends Config
     public function __construct()
     {
         parent::__construct();
-
-        if (getenv('MYSQL_HOST') !== false)
-        {
-            $this->default['hostname'] = getenv('MYSQL_HOST');
-        }
     
         if (getenv('MYSQL_USER') !== false)
         {
